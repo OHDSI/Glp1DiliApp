@@ -1,0 +1,38 @@
+library(OhdsiShinyModules)
+library(ShinyAppBuilder)
+
+shinyConfig <- initializeModuleConfig() |>
+  addModuleConfig(
+    createDefaultAboutConfig()
+  )  |>
+  addModuleConfig(
+    createDefaultDatasourcesConfig()
+  )  |>
+  addModuleConfig(
+    createDefaultCohortGeneratorConfig()
+  ) |>
+  addModuleConfig(
+    createDefaultCharacterizationConfig()
+  ) |>
+  addModuleConfig(
+    createDefaultEstimationConfig()
+  )
+
+cli::cli_h1("Starting shiny server")
+serverStr <- paste0(Sys.getenv("shinydbServer"), "/", Sys.getenv("shinydbDatabase"))
+cli::cli_alert_info("Connecting to {serverStr}")
+connectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = serverStr,
+  port = Sys.getenv("shinydbPort"),
+  user = "shinyproxy",
+  password = Sys.getenv("shinydbPw")
+)
+
+cli::cli_h2("Loading schema")
+ShinyAppBuilder::createShinyApp(
+   config = shinyConfig,
+   connectionDetails = connectionDetails,
+   resultDatabaseSettings = createDefaultResultDatabaseSettings(schema = "apac_glp1ra"),
+   title = "GLP-1 receptor agonists and subsequent risk of acute liver injury"
+)
