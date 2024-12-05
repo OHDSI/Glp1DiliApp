@@ -35,5 +35,5 @@ ShinyAppBuilder::createShinyApp(
    connectionDetails = connectionDetails,
    resultDatabaseSettings = createDefaultResultDatabaseSettings(schema = "apac_glp1ra"),
    title = "GLP-1RA and acute liver injury",
-   studyDescription = "Does exposure to GLP-1 receptor agonists have a different risk of experiencing acute liver injury within time from day after exposure start to exposure end, relative to DPP-4 inhibitors, among the population with Type 2 diabetes mellitus?'.   Preliminary results for ongoing OHDSI network study for internal use only."
+   studyDescription = "Population-level estimation study to answer the question: 'Does exposure to GLP-1 receptor agonists have a different risk of experiencing acute liver injury within time from day after exposure start to exposure end, relative to DPP-4 inhibitors, among the population with Type 2 diabetes mellitus?'.   Preliminary results for ongoing OHDSI network study for internal use only."
 )
